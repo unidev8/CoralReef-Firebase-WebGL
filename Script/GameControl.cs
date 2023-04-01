@@ -8,7 +8,6 @@ using FirebaseWebGL.Examples.Utils;
 using FirebaseWebGL.Scripts.FirebaseBridge;
 using FirebaseWebGL.Scripts.Objects;
 using System;
-using static firebaselogin;
 
 
 public class GameControl : MonoBehaviour//, IDragHandler, IBeginDragHandler, IEndDragHandler
@@ -38,9 +37,8 @@ public class GameControl : MonoBehaviour//, IDragHandler, IBeginDragHandler, IEn
     void Start()
     {
         isEditorMode = false;
-        //FirebaseFirestore.GetDocumentsInCollection(collectionPath_reef, gameObject.name, "PlaceAll", "PlaceAllMyDataObject");
+        FirebaseFirestore.GetDocumentsInCollection(firebaselogin.instance.collectionPath_reef, gameObject.name, "PlaceAll", "PlaceAllMyDataObject");
     }
-
 
     public void GetDocumentsInCollection() =>
            FirebaseFirestore.GetDocumentsInCollection(firebaselogin.instance.collectionPath_reef, gameObject.name, "PlaceAll", "PlaceAllMyDataObject");

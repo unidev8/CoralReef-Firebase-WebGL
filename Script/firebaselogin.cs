@@ -7,28 +7,35 @@ using FirebaseWebGL.Examples.Utils;
 using FirebaseWebGL.Scripts.FirebaseBridge;
 using FirebaseWebGL.Scripts.Objects;
 using System;
+using Models;
 
 public class firebaselogin : MonoBehaviour
 {
-    public TMP_Text statusText;
-
+    public TMP_Text statusAuthChangeText;
+    public TMP_Text statusSignInText;
+    public TMP_Text statusErrorText;
     // Start is called before the first frame update
 
-    public TMP_InputField emailInputField;
-    public TMP_InputField passwordInputField;
-       
-    CoralInfo coralInfo;
-   
-    PlayerInfo playerInfo;
+    //public TMP_InputField emailInputField;
+    //public TMP_InputField passwordInputField;
 
-    public string collectionPath_user = "https://console.firebase.google.com/u/0/project/lionkin-gs/firestore/data/~2Freef_users";
-    public string collectionPath_reef = "https://console.firebase.google.com/u/0/project/lionkin-gs/firestore/data/~2Freef_assets";
-    public string my_reef_id = "test_cscnwjhcuqgeifubwicbwiuefhiwufb";
+
+    [HideInInspector]
+    public string collectionPath_user = "";
+    [HideInInspector]                       
+    public string collectionPath_reef = "";
+    [HideInInspector]
+    public string my_reef_id = "";
+       
+    [HideInInspector]
+    public string uID = "";
+    [HideInInspector]
+    public string reef_ID = "";
+
+    private bool isAuth;
 
     public static firebaselogin instance = null;
 
-    public GameObject coralObj;
-    
 
     private void Awake()
     {
@@ -43,45 +50,63 @@ public class firebaselogin : MonoBehaviour
             DisplayError("The code is not running on a WebGL build; as such, the Javascript functions will not be recognized.");
             return;
         }
-        FirebaseAuth.OnAuthStateChanged(gameObject.name, "DisplayUserInfo", "DisplayInfo");
-        
+        FirebaseAuth.OnAuthStateChanged(gameObject.name, "AuthStateChangedCallback", "DisplayInfo");
+
+        FirebaseAuth.SignInAnonymously(gameObject.name, "DisplayInfo", "DisplayErrorObject");
+
+
     }
-
-    public void SignInWithEmailAndPassword() =>
-        FirebaseAuth.SignInWithEmailAndPassword(emailInputField.text, passwordInputField.text, gameObject.name, "DisplayInfo", "DisplayErrorObject");
-
-    public void LoginToFirebase(string customToken)
+   
+    public void GetReef_Id(string _reef_Id)
     {
-        if (customToken != "")
+        if (_reef_Id != "")
         {
-            //FirebaseAuth.SignInWithCustomTokenAsync(customToken, "DisplayUserInfo", "DisplayErrorObject");       
-            statusText.text = customToken;
-            playerInfo = JsonUtility.FromJson<PlayerInfo>(customToken);
+            //statusText.text = userInfo;
+            //playerInfo = JsonUtility.FromJson<PlayerInfo>(Reef_Id);
             //FirebaseFirestore.GetDocument(collectionPath_user, documentIdInputField.text, gameObject.name, "DisplayData", "DisplayErrorObject");
-        }
-
-        SceneManager.LoadScene(1);
+            reef_ID = _reef_Id;
+        }        
     }
-       
-    public void DisplayUserInfo(string user)
+
+    public void LoadMainScene()
     {
-        //var parsedUser = StringSerializationAPI.Deserialize(typeof(FirebaseUser), user) as FirebaseUser;
+        if (isAuth && reef_ID != "")
+        {
+            collectionPath_reef = "/ reef_id /" + reef_ID + "/ reef_assets";
+            SceneManager.LoadScene(1);
+        }
+            
+        else
+        {
+            statusErrorText.text = "You should be SignIn!";
+        }
+    }
+
+    public void AuthStateChangedCallback(string user)
+    {
+        var parsedUser = StringSerializationAPI.Deserialize(typeof(FirebaseUser), user) as FirebaseUser;
         //DisplayData($"Email: {parsedUser.email}, UserId: {parsedUser.uid}, EmailVerified: {parsedUser.isEmailVerified}");
 
-        SceneManager.LoadScene(1);
-    }
-        
-    public void DisplayData(string data)
-    {
-        statusText.color = statusText.color == Color.green ? Color.blue : Color.green;
-        statusText.text = data;
-        Debug.Log(data);
-    }
+        statusAuthChangeText.color = statusAuthChangeText.color == Color.green ? Color.blue : Color.green;
+        statusAuthChangeText.text = "Name: " + parsedUser.displayName + "uid: " + parsedUser.uid;
+        if (((FirebaseUser)parsedUser).isAnonymous)
+        {
+            isAuth = true;
+            statusErrorText.text = "Signed In! Please Load Assets";
+            uID = parsedUser.uid;            
+        }
+        else
+        {
+            isAuth = false;
+            statusErrorText.text = "Signed Out";
+        }
+        Debug.Log("DisplayUserInfo: " + user);        
+    }         
 
     public void DisplayInfo(string info)
     {
-        statusText.color = Color.white;
-        statusText.text = info;
+        statusSignInText.color = Color.white;
+        statusSignInText.text = info;
         Debug.Log(info);
     }
 
@@ -93,8 +118,8 @@ public class firebaselogin : MonoBehaviour
 
     public void DisplayError(string error)
     {
-        statusText.color = Color.red;
-        statusText.text = error;
+        statusErrorText.color = Color.red;
+        statusErrorText.text = error;
         Debug.LogError(error);
     }  
 
