@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 7f54c691084d5a64480fc5429488f09c
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - GAMKING
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b90ad00328f0b9d449247b917540f0ce, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: db01aefa680fbb34d8dc3771da1bb00b
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Estebak
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 64a0730653153a640b5e03f2460e607f, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

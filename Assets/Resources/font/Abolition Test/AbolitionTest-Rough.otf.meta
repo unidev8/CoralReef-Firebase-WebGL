@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 48730d52e8e3d224e8d45967e7341beb
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Abolition Test
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 8474ceb68dc8927489e4736dba08bfd6, type: 3}
+  - {fileID: 12800000, guid: c5baa731b56a62f4fb8ccbd9dbc44772, type: 3}
+  - {fileID: 12800000, guid: 97c6cec105964074a94754eae82589c0, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

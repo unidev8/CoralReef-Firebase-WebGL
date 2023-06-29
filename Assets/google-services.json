@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "619673294960",
+    "firebase_url": "https://lionkin-gs-default-rtdb.firebaseio.com",
+    "project_id": "lionkin-gs",
+    "storage_bucket": "lionkin-gs.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619673294960:android:96ded90793c94638cefcb5",
+        "android_client_info": {
+          "package_name": "com.reef.game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619673294960-ssv0ainpnt0amqsic9nlnoqb2ms0tu9v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAnDNdDs8aEsdxeZyon1SDum1X8gvABe0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619673294960-ssv0ainpnt0amqsic9nlnoqb2ms0tu9v.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "619673294960-b4f4gfokh2kl3ao5r6ebnimf5v5elfjt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.reef.game"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619673294960:android:1ceae66c1f9bc78dcefcb5",
+        "android_client_info": {
+          "package_name": "online.kingofkings.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619673294960-ssv0ainpnt0amqsic9nlnoqb2ms0tu9v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAnDNdDs8aEsdxeZyon1SDum1X8gvABe0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619673294960-ssv0ainpnt0amqsic9nlnoqb2ms0tu9v.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "619673294960-b4f4gfokh2kl3ao5r6ebnimf5v5elfjt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.reef.game"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

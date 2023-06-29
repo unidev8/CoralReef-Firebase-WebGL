@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 5cc11ef09e9fa144383c4d87df4d5079
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - HOGATA
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 3828ab0ff1e93134c85ffd5611c1cffe, type: 3}
+  - {fileID: 12800000, guid: d4e228fdff033604fbb139ba3fafe731, type: 3}
+  - {fileID: 12800000, guid: a0b51cf99d8039c45b281287a6a2e4a3, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

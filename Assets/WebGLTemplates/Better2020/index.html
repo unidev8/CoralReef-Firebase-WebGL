@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Reef.Game</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script>
+      window.UrlGetParams = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+      });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+  <body class="dark">
+
+    <svg id="close_blur_backdrop" style="position:absolute;right:20px;top:20px;display:none" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32"><g transform="translate(0, 0)"><path d="M26.606,6.808l-1.414-1.414c-.391-.391-1.023-.391-1.414,0l-7.778,7.778-7.778-7.778c-.391-.391-1.023-.391-1.414,0l-1.414,1.414c-.391,.391-.391,1.023,0,1.414l7.778,7.778-7.778,7.778c-.391,.391-.391,1.023,0,1.414l1.414,1.414c.195,.195,.451,.293,.707,.293s.512-.098,.707-.293l7.778-7.778,7.778,7.778c.195,.195,.451,.293,.707,.293s.512-.098,.707-.293l1.414-1.414c.391-.391,.391-1.023,0-1.414l-7.778-7.778,7.778-7.778c.391-.391,.391-1.023,0-1.414Z" fill="#f2f2f2"></path></g></svg> 
+    <div class="blur_backdrop"></div>
+
+
+
+    <div id="unity-container" class="unity-desktop">
+      <canvas id="unity-canvas"></canvas>
+    </div>
+    <div id="loading-cover" style="display:none;">
+      <div id="unity-loading-bar">
+        <div id="unity-logo"><img src="logo.png"></div>
+        <div id="unity-progress-bar-empty" style="display: none;">
+          <img src="reef-loader.gif" alt="loading"></img>
+        </div>
+        <div class="spinner"></div>
+      </div>
+    </div>
+    <div id="unity-fullscreen-button" style="display: none;"></div>
+    <script>
+      const hideFullScreenButton = "";
+      const buildUrl = "Build";
+      const loaderUrl = buildUrl + "/WebGL.loader.js";
+      const config = {
+        dataUrl: buildUrl + "/WebGL.data",
+        frameworkUrl: buildUrl + "/WebGL.framework.js",
+        codeUrl: buildUrl + "/WebGL.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "com.reef.game",
+        productVersion: "0.1",
+      };
+
+      const container = document.querySelector("#unity-container");
+      const canvas = document.querySelector("#unity-canvas");
+      const loadingCover = document.querySelector("#loading-cover");
+      const progressBarEmpty = document.querySelector("#unity-progress-bar-empty");
+      const fullscreenButton = document.querySelector("#unity-fullscreen-button");
+      const spinner = document.querySelector('.spinner');
+
+      const canFullscreen = (function() {
+        for (const key of [
+            'exitFullscreen',
+            'webkitExitFullscreen',
+            'webkitCancelFullScreen',
+            'mozCancelFullScreen',
+            'msExitFullscreen',
+          ]) {
+          if (key in document) {
+            return true;
+          }
+        }
+        return false;
+      }());
+
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        container.className = "unity-mobile";
+        config.devicePixelRatio = 1;
+      }
+      loadingCover.style.display = "";
+
+      if(window.UrlGetParams.reef_id == null){
+              alert('No Ref ID');
+      }else{
+        
+          const script = document.createElement("script");
+          script.src = loaderUrl;
+          script.onload = () => {
+            createUnityInstance(canvas, config, (progress) => {
+              spinner.style.display = "none";
+              progressBarEmpty.style.display = "";
+            }).then((unityInstance) => {
+                window.unityInstance = unityInstance;
+                loadingCover.style.display = "none";
+              /*if (canFullscreen) {
+                if (!hideFullScreenButton) {
+                  fullscreenButton.style.display = "";
+                }
+                fullscreenButton.onclick = () => {
+                  unityInstance.SetFullscreen(1);
+                };
+              }*/
+            }).catch((message) => {
+              alert(message);
+            });
+          };
+          document.body.appendChild(script);
+
+        }
+   
+
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics-compat.js"></script>
+    <script>
+	    const firebaseApp = firebase.initializeApp({	    
+        apiKey: "AIzaSyCLNcOhwehdxe2bkV3gjDhcKV6YD3bdCVc",
+        authDomain: "lionkin-gs.firebaseapp.com",
+        databaseURL: "https://lionkin-gs-default-rtdb.firebaseio.com",
+        projectId: "lionkin-gs",
+        storageBucket: "lionkin-gs.appspot.com",
+        messagingSenderId: "619673294960",
+        appId: "1:619673294960:web:d1ccc82ed0d9a583cefcb5",
+        measurementId: "G-FYJ9J1LZR3"
+	    });
+	    const db = firebaseApp.firestore();
+	    const auth = firebaseApp.auth();
+
+      auth.onAuthStateChanged(function (user) {
+          // handle it
+          console.log('------------------------------');
+          console.log('USER: ', user);
+          console.log('------------------------------');
+          if(user){
+            window.userObject = user;
+          }
+
+      });
+
+    </script>
+
+    <style>
+      .blur_backdrop {
+        filter: blur(4px);
+        position: absolute;
+        left:0;right:0;bottom:0;top:0;
+        z-index:10;
+        backdrop-filter: blur(4px);
+        display:none;
+      }
+      #close_blur_backdrop {
+        cursor: pointer;
+        z-index: 99;
+      }
+    </style>
+
+
+    <script>
+
+      window.showShopView = async function(){
+        $('.blur_backdrop').fadeIn(200);
+        $('#close_blur_backdrop').show();
+      }
+
+      window.hideShopView = async function(){
+        $('#close_blur_backdrop').hide();
+        $('.blur_backdrop').fadeOut(200);
+      }
+
+      window.toggleUserLogin = async function(){
+        
+      }
+
+      $( document ).ready(function() {
+          $('#close_blur_backdrop').click(async function(){
+            window.hideShopView();
+          });
+          window.showShopView();
+      });
+    
+    </script>
+
+    <script defer src="dist/main.js"></script></head>
+  </body>
+</html>

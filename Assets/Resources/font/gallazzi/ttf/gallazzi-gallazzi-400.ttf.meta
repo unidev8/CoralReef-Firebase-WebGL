@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 4551655ac6cbdb54a943732998415f2a
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Gallazzi
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 0319c4a4e1434e941bf8f9e522a289d7, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
