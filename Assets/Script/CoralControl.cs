@@ -5,7 +5,7 @@ using System.Collections;
 using FirebaseWebGL.Scripts.FirebaseBridge;
 using UnityEditor;
 using System.Linq;
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 using System.Collections.Generic;
 using FirebaseWebGL.Examples.Utils;
 using FirebaseWebGL.Scripts.Objects;

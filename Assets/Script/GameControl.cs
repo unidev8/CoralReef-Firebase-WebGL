@@ -5,18 +5,19 @@ using TMPro;
 using FirebaseWebGL.Examples.Utils;
 using FirebaseWebGL.Scripts.FirebaseBridge;
 using FirebaseWebGL.Scripts.Objects;
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 using System.Collections.Generic;
 using System;
 using System.Linq;
 using CoralReef;
-using Newtonsoft.Json.Linq;
+//using Newtonsoft.Json.Linq;
 using UnityEngine.UI;
 using UnityStandardAssets.ImageEffects;
 
 public class GameControl : MonoBehaviour//, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     //public GameObject txt_InventoryCoralCount;
+
     public GameObject progressLoading;
     public GameObject scrollView;
     public GameObject txtAllCoralCount;
@@ -38,7 +39,6 @@ public class GameControl : MonoBehaviour//, IDragHandler, IBeginDragHandler, IEn
     public bool isUserlogin = false;
     private bool isInventory = false;
 
-    //private bool isMovingMode = true;
     [HideInInspector]
     public Animator aniInventory;
 
@@ -46,8 +46,7 @@ public class GameControl : MonoBehaviour//, IDragHandler, IBeginDragHandler, IEn
     private float contentMaskWidth;
     private float buttonCoralWidth;
     private float contentWidth;
-    //private bool isDeleted = false;
-
+    
     private const float cRotationSpeed = 4f;
     private const float cScaleSpeed = 0.25f;
     
@@ -67,7 +66,6 @@ public class GameControl : MonoBehaviour//, IDragHandler, IBeginDragHandler, IEn
         instance = this;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         isEditorMode = false;
@@ -94,7 +92,6 @@ public class GameControl : MonoBehaviour//, IDragHandler, IBeginDragHandler, IEn
 
     public IEnumerator PlaceAllMyData(string data)
     {
-        //Debug.Log("PlaceAllMyData: data = " + data);
         Camera.main.GetComponent<UnityStandardAssets.ImageEffects.DepthOfField>().focalLength = 0f;
         try
         {
@@ -128,7 +125,6 @@ public class GameControl : MonoBehaviour//, IDragHandler, IBeginDragHandler, IEn
             CoralInfo coral = dicCoral_Whole.ElementAt(i).Value;
             string keyCoral = dicCoral_Whole.ElementAt(i).Key;
 
-            //Debug.Log("PlayceAllData: keyCoral = " + keyCoral);
             //if (coral.reef_id == firebaselogin.instance.reef_ID)
             {
                 IEnumerable<GameObject> result = from corallbl in lstCoralLblTypes
@@ -168,7 +164,6 @@ public class GameControl : MonoBehaviour//, IDragHandler, IBeginDragHandler, IEn
                 }
                 if (coralsCount > 0)
                 {
-                    //Debug.Log("i = " + i + ", coralCount=" + coralsCount);
                     txtAllCoralCount.GetComponent<TMP_Text>().text = i.ToString() + " / " + coralsCount.ToString();
                     progressLoading.GetComponent<Slider>().value = (float)i / coralsCount;
                     //txt_InventoryCoralCount.GetComponent<TMP_Text>().text = j.ToString() + " / " + coralsCount.ToString();
@@ -210,7 +205,6 @@ public class GameControl : MonoBehaviour//, IDragHandler, IBeginDragHandler, IEn
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, 100))
                 {
-                    //Debug.Log("Not inEditMode: hitObj = " + hit.collider.gameObject.name + ", tag = " + hit.collider.gameObject.tag + ", layer = " + hit.collider.gameObject.layer );
                     if (hit.collider && hit.collider.gameObject.tag == "Coral")
                     {
                         curSelObj = hit.collider.gameObject;
@@ -274,12 +268,10 @@ public class GameControl : MonoBehaviour//, IDragHandler, IBeginDragHandler, IEn
 
                 curSelObj.transform.RotateAround(curSelObj.transform.position, Vector3.forward, dx); //- dy, 0f, dx, Space.Self );
                 curSelObj.transform.RotateAround(curSelObj.transform.position, Vector3.right, -dy); //- dy, 0f, dx, Space.Self );
-                //Debug.Log("rotat= " + curSelObj.transform.eulerAngles);
                 //curSelObj.transform.Rotate(-dy, 0f, dx, Space.Self);
                 curSelObj.transform.localScale += new Vector3(ds, ds, ds);
                 //curSelObj.transform.rotation = Quaternion.AngleAxis( (curSelObj.transform.eulerAngles.z + dx), Vector3.fwd );
                 //curSelObj.transform.rotation = Quaternion.AngleAxis((curSelObj.transform.eulerAngles.x + dy), Vector3.right);
-                //Debug.Log("EditMode! dx =" + dx + ", dy = " + dy);
                 //curSelObj.transform.rotation = Quaternion.FromToRotation ( );
                 isUpdated = true;
             }
@@ -300,7 +292,6 @@ public class GameControl : MonoBehaviour//, IDragHandler, IBeginDragHandler, IEn
     {       
         for (int i = 0; i < dicCoral_Whole.Count; i++)
         {
-            //Debug.Log("Key = " + icCoral_Whole.ElementAt(i).Key);
             if (dicCoral_Whole.ElementAt(i).Key == curSelObj.name)
             {
                 //Debug.Log(" UpdateCoral: selObjValue= " + dicCoral_Whole.ElementAt(i).Value.coralIdx + ", docId = " + dicCoral_Whole.ElementAt(i).Key );
@@ -356,16 +347,13 @@ public class GameControl : MonoBehaviour//, IDragHandler, IBeginDragHandler, IEn
     {
         contentMaskWidth = scrollRect.viewport.rect.width;
         buttonCoralWidth = scrollRect.content.GetComponent <GridLayoutGroup>().cellSize.x + scrollRect.content.GetComponent<GridLayoutGroup>().spacing.x;
-        //Debug.Log("contentMaskWidth = " + contentMaskWidth + ", buttonCoralWidth = " + buttonCoralWidth);
         RectTransform rt = scrollRect.content.GetComponent<RectTransform>();
         contentWidth = buttonCoralWidth * inventoryCount;
         rt.sizeDelta = new Vector2(contentWidth, rt.sizeDelta.y);
-        //Debug.Log("ScorllPos = " + scrollRect.content.transform.localPosition + ", contentsWidth= " + contentWidth);
         if (contentWidth - (-scrollRect.content.transform.localPosition.x) > contentMaskWidth )
         {
             scrollRect.content.transform.localPosition -= new Vector3(buttonCoralWidth, 0f, 0f);
             btnRightEnable.SetActive(true);
-            //Debug.Log("NewScorllPos = " + scrollRect.content.transform.localPosition);
         }
         else
         {
@@ -450,8 +438,6 @@ public class GameControl : MonoBehaviour//, IDragHandler, IBeginDragHandler, IEn
             DisplayInfo("Callback of ListenForDocumentChange:\n" + "reef_assets_update= " + updateOwnerInfo.reef_assets_update
                + ", reef_owner_update.seconds = " + updateOwnerInfo.reef_owner_update.seconds);
 
-            //Debug.Log("baseOwnerInfo.reef_owner_update.seconds = " + baseOwnerInfo.reef_owner_update.seconds);
-            //Debug.Log("updateOwnerInfo.reef_owner_update.seconds = " + baseOwnerInfo.reef_owner_update.seconds);
             if (baseOwnerInfo.reef_owner_update.seconds < updateOwnerInfo.reef_owner_update.seconds)
             {
                 //aniInventory.SetInteger("inventoryState", 1);
@@ -461,7 +447,6 @@ public class GameControl : MonoBehaviour//, IDragHandler, IBeginDragHandler, IEn
             }
         }
 
-        // for test;
         isUserlogin = true;
     }
 
